@@ -20,17 +20,19 @@ namespace ClassifiedAds.Domain.Services
             _repository = repository;
         }
 
-        public virtual void Add(T entity)
+        public virtual void AddOrUpdate(T entity)
         {
-            _repository.Add(entity);
+            _repository.AddOrUpdate(entity);
             _unitOfWork.SaveChanges();
-            DomainEvents.Dispatch(new EntityCreatedEvent<T>(entity));
-        }
 
-        public virtual void Update(T entity)
-        {
-            _unitOfWork.SaveChanges();
-            DomainEvents.Dispatch(new EntityUpdatedEvent<T>(entity));
+            if (entity.Id.Equals(default(Guid)))
+            {
+                DomainEvents.Dispatch(new EntityCreatedEvent<T>(entity));
+            }
+            else
+            {
+                DomainEvents.Dispatch(new EntityUpdatedEvent<T>(entity));
+            }
         }
 
         public virtual IList<T> Get()

@@ -22,10 +22,12 @@ namespace ClassifiedAds.Domain.Services
 
         public virtual void AddOrUpdate(T entity)
         {
+            var adding = entity.Id.Equals(default);
+
             _repository.AddOrUpdate(entity);
             _unitOfWork.SaveChanges();
 
-            if (entity.Id.Equals(default(Guid)))
+            if (adding)
             {
                 DomainEvents.Dispatch(new EntityCreatedEvent<T>(entity));
             }

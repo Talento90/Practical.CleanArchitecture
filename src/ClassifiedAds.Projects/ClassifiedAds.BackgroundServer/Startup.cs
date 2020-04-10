@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
-using ClassifiedAds.BackgroundServer.Jobs;
+using ClassifiedAds.Application.BackgroundTasks;
+using ClassifiedAds.Domain.Notification;
 using ClassifiedAds.Infrastructure.HealthChecks;
+using ClassifiedAds.Infrastructure.Notification;
 using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Builder;
@@ -49,6 +51,8 @@ namespace ClassifiedAds.BackgroundServer
                 };
                 x.UseSqlServerStorage(Configuration.GetConnectionString("ClassifiedAds"), options);
             });
+
+            services.AddTransient<IWebNotification, SignalRNotification>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

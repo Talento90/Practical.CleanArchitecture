@@ -4,11 +4,13 @@ using ClassifiedAds.Application.Events;
 using ClassifiedAds.Domain.Identity;
 using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
 using ClassifiedAds.Domain.Infrastructure.Storages;
+using ClassifiedAds.Domain.Notification;
 using ClassifiedAds.Infrastructure.Identity;
 using ClassifiedAds.Infrastructure.MessageBrokers.AzureQueue;
 using ClassifiedAds.Infrastructure.MessageBrokers.AzureServiceBus;
 using ClassifiedAds.Infrastructure.MessageBrokers.Kafka;
 using ClassifiedAds.Infrastructure.MessageBrokers.RabbitMQ;
+using ClassifiedAds.Infrastructure.Notification;
 using ClassifiedAds.Infrastructure.Storages.Amazon;
 using ClassifiedAds.Infrastructure.Storages.Azure;
 using ClassifiedAds.Infrastructure.Storages.Local;
@@ -177,6 +179,7 @@ namespace ClassifiedAds.WebMVC
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ICurrentUser, CurrentWebUser>();
+            services.AddTransient<IWebNotification, SignalRNotification>();
 
             if (appSettings.Storage.UsedAzure())
             {
@@ -445,10 +448,8 @@ namespace ClassifiedAds.WebMVC
                     AppSettings.MessageBroker.AzureServiceBus.QueueName_FileDeleted);
             }
 
-            var connection = new HubConnectionBuilder()
-                .WithUrl($"{AppSettings.NotificationServer.Endpoint}/SimulatedLongRunningTaskHub")
-                .AddMessagePackProtocol()
-                .Build();
+            var notification = new SignalRNotification();
+            var endpoint = $"{AppSettings.NotificationServer.Endpoint}/SimulatedLongRunningTaskHub";
 
             fileUploadedMessageQueueReceiver?.Receive(data =>
             {
@@ -456,11 +457,8 @@ namespace ClassifiedAds.WebMVC
 
                 string message = data.FileEntry.Id.ToString();
 
-                connection.StartAsync().GetAwaiter().GetResult();
+                notification.Send(endpoint, "SendTaskStatus", new { Step = $"{AppSettings.MessageBroker.Provider} - File Uploaded", Message = message });
 
-                connection.InvokeAsync("SendTaskStatus", $"{AppSettings.MessageBroker.Provider} - File Uploaded", message);
-
-                connection.StopAsync().GetAwaiter().GetResult();
             });
 
             fileDeletedMessageQueueReceiver?.Receive(data =>
@@ -469,11 +467,7 @@ namespace ClassifiedAds.WebMVC
 
                 string message = data.FileEntry.Id.ToString();
 
-                connection.StartAsync().GetAwaiter().GetResult();
-
-                connection.InvokeAsync("SendTaskStatus", $"{AppSettings.MessageBroker.Provider} - File Deleted", message);
-
-                connection.StopAsync().GetAwaiter().GetResult();
+                notification.Send(endpoint, "SendTaskStatus", new { Step = $"{AppSettings.MessageBroker.Provider} - File Deleted", Message = message });
             });
         }
     }

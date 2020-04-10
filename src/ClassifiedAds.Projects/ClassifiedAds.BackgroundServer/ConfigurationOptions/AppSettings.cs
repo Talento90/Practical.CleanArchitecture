@@ -1,8 +1,8 @@
-﻿using ClassifiedAds.WebMVC.ConfigurationOptions.MessageBroker;
-using ClassifiedAds.WebMVC.ConfigurationOptions.Storage;
+﻿using ClassifiedAds.BackgroundServer.ConfigurationOptions.MessageBroker;
+using ClassifiedAds.BackgroundServer.ConfigurationOptions.Storage;
 using Microsoft.Extensions.Options;
 
-namespace ClassifiedAds.WebMVC.ConfigurationOptions
+namespace ClassifiedAds.BackgroundServer.ConfigurationOptions
 {
     public class AppSettings
     {
@@ -10,19 +10,11 @@ namespace ClassifiedAds.WebMVC.ConfigurationOptions
 
         public CheckDependency CheckDependency { get; set; }
 
-        public OpenIdConnect OpenIdConnect { get; set; }
-
-        public ResourceServer ResourceServer { get; set; }
-
         public NotificationServer NotificationServer { get; set; }
-
-        public BackgroundServer BackgroundServer { get; set; }
 
         public string AllowedHosts { get; set; }
 
         public string CurrentUrl { get; set; }
-
-        public string KeyVaultName { get; set; }
 
         public StorageOptions Storage { get; set; }
 
@@ -30,22 +22,7 @@ namespace ClassifiedAds.WebMVC.ConfigurationOptions
 
         public ValidateOptionsResult Validate()
         {
-            var validationRs = OpenIdConnect.Validate();
-
-            if (validationRs.Failed)
-            {
-                return validationRs;
-            }
-
-            validationRs = ResourceServer.Validate();
-
-            if (validationRs.Failed)
-            {
-                return validationRs;
-            }
-
             return ValidateOptionsResult.Success;
-
         }
     }
 

@@ -216,7 +216,7 @@
 
   ![alt text](/docs/imgs/blazor-home-page.png)
 
-## How to Build and Run Frond-ends:
+## How to Build and Run Single Page Applications:
 - Angular:
   + Navigate to folder: [ClassifiedAds.UIs/angular/](/src/ClassifiedAds.UIs/angular/)
     ```

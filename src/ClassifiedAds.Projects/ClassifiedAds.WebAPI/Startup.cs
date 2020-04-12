@@ -26,7 +26,7 @@ namespace ClassifiedAds.WebAPI
             AppSettings = new AppSettings();
             Configuration.Bind(AppSettings);
 
-            Logger.Configure(env.ContentRootPath, "ClassifiedAds.WebAPI", AppSettings.LoggerOptions);
+            Logger.Configure(env, AppSettings.LoggerOptions);
         }
 
         public IConfiguration Configuration { get; }

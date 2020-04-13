@@ -2,7 +2,7 @@
 using ClassifiedAds.Domain.Repositories;
 using System;
 
-namespace ClassifiedAds.Domain.Services
+namespace ClassifiedAds.Application.Services
 {
     public class UserService : CrudService<User>, IUserService
     {

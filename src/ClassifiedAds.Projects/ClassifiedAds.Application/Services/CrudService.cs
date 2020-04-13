@@ -6,12 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ClassifiedAds.Domain.Services
+namespace ClassifiedAds.Application.Services
 {
     public class CrudService<T> : ICrudService<T>
         where T : AggregateRoot<Guid>
     {
-        protected readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         protected readonly IRepository<T, Guid> _repository;
 
         public CrudService(IRepository<T, Guid> repository)

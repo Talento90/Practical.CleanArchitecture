@@ -15,9 +15,13 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>))
-                    .AddScoped<IUserService, UserService>()
-                    .AddScoped<IProductService, ProductService>();
+            DomainEvents.RegisterHandlers(Assembly.GetExecutingAssembly());
+
+            services
+                .AddSingleton<IDomainEvents, DomainEvents>()
+                .AddScoped(typeof(ICrudService<>), typeof(CrudService<>))
+                .AddScoped<IUserService, UserService>()
+                .AddScoped<IProductService, ProductService>();
 
             return services;
         }
@@ -53,11 +57,6 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             return services;
-        }
-
-        public static void RegisterDomainEventHandlers(this IServiceProvider serviceProvider)
-        {
-            DomainEvents.RegisterHandlers(Assembly.GetExecutingAssembly(), serviceProvider);
         }
 
         private static void AddHandler(IServiceCollection services, Type type)

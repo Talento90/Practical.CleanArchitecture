@@ -19,7 +19,7 @@ COPY ./ClassifiedAds.Persistence/*.csproj ./ClassifiedAds.Persistence/
 COPY ./ClassifiedAds.UnitTests/*.csproj ./ClassifiedAds.UnitTests/
 COPY ./ClassifiedAds.WebAPI/*.csproj ./ClassifiedAds.WebAPI/
 COPY ./ClassifiedAds.WebMVC/*.csproj ./ClassifiedAds.WebMVC/
-COPY ./ClassifiedAds.Projects.sln .
+COPY ./ClassifiedAds.Monolith.sln .
 RUN dotnet restore
 
 # Copy everything else and build

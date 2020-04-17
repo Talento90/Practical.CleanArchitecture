@@ -1,6 +1,6 @@
 ﻿using ClassifiedAds.Application;
-using ClassifiedAds.Application.Queries.Products;
-using ClassifiedAds.Application.Services;
+using ClassifiedAds.Application.Products.Queries;
+using ClassifiedAds.Application.Products.Services;
 using ClassifiedAds.CrossCuttingConcerns.ExtensionMethods;
 using ClassifiedAds.Domain.Entities;
 using ClassifiedAds.WebMVC.ConfigurationOptions;

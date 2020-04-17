@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using ClassifiedAds.Application.Services;
+using ClassifiedAds.Application;
 using ClassifiedAds.Domain.Entities;
 using ClassifiedAds.IdentityServer.Models;
 using IdentityModel;

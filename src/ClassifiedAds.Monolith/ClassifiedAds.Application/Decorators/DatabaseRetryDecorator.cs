@@ -1,5 +1,4 @@
-﻿using ClassifiedAds.Application.Commands;
-using System;
+﻿using System;
 
 namespace ClassifiedAds.Application.Decorators
 {

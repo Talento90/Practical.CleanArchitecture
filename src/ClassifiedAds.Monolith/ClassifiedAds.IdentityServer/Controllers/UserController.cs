@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using ClassifiedAds.Application;
-using ClassifiedAds.Application.Commands.Users;
-using ClassifiedAds.Application.Queries.Roles;
-using ClassifiedAds.Application.Queries.Users;
+﻿using ClassifiedAds.Application;
+using ClassifiedAds.Application.Roles.Queries;
+using ClassifiedAds.Application.Users.Commands;
+using ClassifiedAds.Application.Users.Queries;
 using ClassifiedAds.Domain.Entities;
 using ClassifiedAds.IdentityServer.Models.UserModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ClassifiedAds.IdentityServer.Controllers
 {

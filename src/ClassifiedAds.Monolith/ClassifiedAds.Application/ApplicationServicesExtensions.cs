@@ -1,8 +1,7 @@
 ﻿using ClassifiedAds.Application;
-using ClassifiedAds.Application.Commands;
 using ClassifiedAds.Application.Decorators;
-using ClassifiedAds.Application.Queries;
-using ClassifiedAds.Application.Services;
+using ClassifiedAds.Application.Products.Services;
+using ClassifiedAds.Application.Users.Services;
 using ClassifiedAds.Domain.Events;
 using System;
 using System.Collections.Generic;

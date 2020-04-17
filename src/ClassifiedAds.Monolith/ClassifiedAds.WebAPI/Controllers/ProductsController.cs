@@ -1,6 +1,6 @@
 ﻿using ClassifiedAds.Application;
-using ClassifiedAds.Application.Commands.Products;
-using ClassifiedAds.Application.Queries.Products;
+using ClassifiedAds.Application.Products.Commands;
+using ClassifiedAds.Application.Products.Queries;
 using ClassifiedAds.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

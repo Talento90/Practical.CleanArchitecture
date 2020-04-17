@@ -1,4 +1,4 @@
-using ClassifiedAds.Application.Services;
+using ClassifiedAds.Application.Users.Services;
 using ClassifiedAds.CrossCuttingConcerns.Exceptions;
 using ClassifiedAds.Domain.Entities;
 using ClassifiedAds.Domain.Events;

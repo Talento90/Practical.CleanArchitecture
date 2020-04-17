@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading;
 using ClassifiedAds.Application.BackgroundTasks;
-using ClassifiedAds.Application.Events;
+using ClassifiedAds.Application.FileEntries.Events;
 using ClassifiedAds.BackgroundServer.ConfigurationOptions;
 using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
 using ClassifiedAds.Domain.Notification;

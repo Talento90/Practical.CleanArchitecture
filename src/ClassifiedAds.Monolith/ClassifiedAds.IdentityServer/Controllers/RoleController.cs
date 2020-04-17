@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using ClassifiedAds.Application;
-using ClassifiedAds.Application.Commands.Roles;
-using ClassifiedAds.Application.Queries.Roles;
+using ClassifiedAds.Application.Roles.Commands;
+using ClassifiedAds.Application.Roles.Queries;
 using ClassifiedAds.Domain.Entities;
 using ClassifiedAds.IdentityServer.Models.RoleModels;
 using Microsoft.AspNetCore.Mvc;

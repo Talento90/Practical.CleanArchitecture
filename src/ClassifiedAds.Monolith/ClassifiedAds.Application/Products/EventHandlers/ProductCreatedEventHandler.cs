@@ -2,24 +2,21 @@
 using ClassifiedAds.Domain.Entities;
 using ClassifiedAds.Domain.Events;
 using ClassifiedAds.Domain.Identity;
-using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace ClassifiedAds.Application.FileEntries.Events
+namespace ClassifiedAds.Application.Products.EventHandlers
 {
-    public class FileEntryDeletedEventHandler : IDomainEventHandler<EntityDeletedEvent<FileEntry>>
+    public class ProductCreatedEventHandler : IDomainEventHandler<EntityCreatedEvent<Product>>
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly IMessageSender<FileDeletedEvent> _fileDeletedEventSender;
 
-        public FileEntryDeletedEventHandler(IMessageSender<FileDeletedEvent> fileDeletedEventSender, IServiceProvider serviceProvider)
+        public ProductCreatedEventHandler(IServiceProvider serviceProvider)
         {
-            _fileDeletedEventSender = fileDeletedEventSender;
             _serviceProvider = serviceProvider;
         }
 
-        public void Handle(EntityDeletedEvent<FileEntry> domainEvent)
+        public void Handle(EntityCreatedEvent<Product> domainEvent)
         {
             using (var scope = _serviceProvider.CreateScope())
             {
@@ -28,19 +25,13 @@ namespace ClassifiedAds.Application.FileEntries.Events
 
                 auditSerivce.AddOrUpdate(new AuditLogEntry
                 {
-                    UserId = currentUser.IsAuthenticated ? currentUser.UserId : Guid.Empty,
+                    UserId = currentUser.IsAuthenticated ? currentUser.UserId: Guid.Empty,
                     CreatedDateTime = domainEvent.EventDateTime,
-                    Action = "DELETE_FILEENTRY",
+                    Action = "CREATED_PRODUCT",
                     ObjectId = domainEvent.Entity.Id.ToString(),
                     Log = domainEvent.Entity.AsJsonString(),
                 });
             }
-
-            // Forward to external systems
-            _fileDeletedEventSender.Send(new FileDeletedEvent
-            {
-                FileEntry = domainEvent.Entity,
-            });
         }
     }
 }

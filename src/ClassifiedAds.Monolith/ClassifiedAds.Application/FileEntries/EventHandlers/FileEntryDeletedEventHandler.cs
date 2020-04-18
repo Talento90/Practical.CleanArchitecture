@@ -1,24 +1,27 @@
-﻿using ClassifiedAds.CrossCuttingConcerns.ExtensionMethods;
+﻿using ClassifiedAds.Application.FileEntries.DTOs;
+using ClassifiedAds.CrossCuttingConcerns.ExtensionMethods;
 using ClassifiedAds.Domain.Entities;
 using ClassifiedAds.Domain.Events;
 using ClassifiedAds.Domain.Identity;
+using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace ClassifiedAds.Application.FileEntries.Events
+namespace ClassifiedAds.Application.FileEntries.EventHandlers
 {
-    public class FileEntryUpdatedEventHandler : IDomainEventHandler<EntityUpdatedEvent<FileEntry>>
+    public class FileEntryDeletedEventHandler : IDomainEventHandler<EntityDeletedEvent<FileEntry>>
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly IMessageSender<FileDeletedEvent> _fileDeletedEventSender;
 
-        public FileEntryUpdatedEventHandler(IServiceProvider serviceProvider)
+        public FileEntryDeletedEventHandler(IMessageSender<FileDeletedEvent> fileDeletedEventSender, IServiceProvider serviceProvider)
         {
+            _fileDeletedEventSender = fileDeletedEventSender;
             _serviceProvider = serviceProvider;
         }
 
-        public void Handle(EntityUpdatedEvent<FileEntry> domainEvent)
+        public void Handle(EntityDeletedEvent<FileEntry> domainEvent)
         {
-            // Handle the event here and we can also forward to external systems
             using (var scope = _serviceProvider.CreateScope())
             {
                 var auditSerivce = scope.ServiceProvider.GetService<ICrudService<AuditLogEntry>>();
@@ -28,11 +31,17 @@ namespace ClassifiedAds.Application.FileEntries.Events
                 {
                     UserId = currentUser.IsAuthenticated ? currentUser.UserId : Guid.Empty,
                     CreatedDateTime = domainEvent.EventDateTime,
-                    Action = "UPDATED_FILEENTRY",
+                    Action = "DELETE_FILEENTRY",
                     ObjectId = domainEvent.Entity.Id.ToString(),
                     Log = domainEvent.Entity.AsJsonString(),
                 });
             }
+
+            // Forward to external systems
+            _fileDeletedEventSender.Send(new FileDeletedEvent
+            {
+                FileEntry = domainEvent.Entity,
+            });
         }
     }
 }

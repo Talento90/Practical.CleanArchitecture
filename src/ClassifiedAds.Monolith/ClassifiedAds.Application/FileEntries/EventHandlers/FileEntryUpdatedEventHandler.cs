@@ -2,25 +2,23 @@
 using ClassifiedAds.Domain.Entities;
 using ClassifiedAds.Domain.Events;
 using ClassifiedAds.Domain.Identity;
-using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace ClassifiedAds.Application.FileEntries.Events
+namespace ClassifiedAds.Application.FileEntries.EventHandlers
 {
-    public class FileEntryCreatedEventHandler : IDomainEventHandler<EntityCreatedEvent<FileEntry>>
+    public class FileEntryUpdatedEventHandler : IDomainEventHandler<EntityUpdatedEvent<FileEntry>>
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly IMessageSender<FileUploadedEvent> _fileUploadedEventSender;
 
-        public FileEntryCreatedEventHandler(IMessageSender<FileUploadedEvent> fileUploadedEventSender, IServiceProvider serviceProvider)
+        public FileEntryUpdatedEventHandler(IServiceProvider serviceProvider)
         {
-            _fileUploadedEventSender = fileUploadedEventSender;
             _serviceProvider = serviceProvider;
         }
 
-        public void Handle(EntityCreatedEvent<FileEntry> domainEvent)
+        public void Handle(EntityUpdatedEvent<FileEntry> domainEvent)
         {
+            // Handle the event here and we can also forward to external systems
             using (var scope = _serviceProvider.CreateScope())
             {
                 var auditSerivce = scope.ServiceProvider.GetService<ICrudService<AuditLogEntry>>();
@@ -30,17 +28,11 @@ namespace ClassifiedAds.Application.FileEntries.Events
                 {
                     UserId = currentUser.IsAuthenticated ? currentUser.UserId : Guid.Empty,
                     CreatedDateTime = domainEvent.EventDateTime,
-                    Action = "CREATED_FILEENTRY",
+                    Action = "UPDATED_FILEENTRY",
                     ObjectId = domainEvent.Entity.Id.ToString(),
                     Log = domainEvent.Entity.AsJsonString(),
                 });
             }
-
-            // Forward to external systems
-            _fileUploadedEventSender.Send(new FileUploadedEvent
-            {
-                FileEntry = domainEvent.Entity,
-            });
         }
     }
 }

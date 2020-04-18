@@ -1,7 +1,4 @@
 ﻿using ClassifiedAds.Domain.Entities;
-using ClassifiedAds.Domain.Events;
-using ClassifiedAds.Domain.Repositories;
-using System;
 
 namespace ClassifiedAds.Application.Products.Commands
 {
@@ -12,20 +9,16 @@ namespace ClassifiedAds.Application.Products.Commands
 
     internal class DeleteProductCommandHandler : ICommandHandler<DeleteProductCommand>
     {
-        private readonly IRepository<Product, Guid> _productRepository;
-        private readonly IDomainEvents _domainEvents;
+        private readonly ICrudService<Product> _productService;
 
-        public DeleteProductCommandHandler(IRepository<Product, Guid> productRepository, IDomainEvents domainEvents)
+        public DeleteProductCommandHandler(ICrudService<Product> productService)
         {
-            _productRepository = productRepository;
-            _domainEvents = domainEvents;
+            _productService = productService;
         }
 
         public void Handle(DeleteProductCommand command)
         {
-            _productRepository.Delete(command.Product);
-            _productRepository.UnitOfWork.SaveChanges();
-            _domainEvents.Dispatch(new EntityDeletedEvent<Product>(command.Product, DateTime.Now));
+            _productService.Delete(command.Product);
         }
     }
 }

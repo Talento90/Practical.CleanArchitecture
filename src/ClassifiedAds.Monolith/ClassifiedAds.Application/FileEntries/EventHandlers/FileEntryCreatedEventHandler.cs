@@ -1,4 +1,5 @@
-﻿using ClassifiedAds.CrossCuttingConcerns.ExtensionMethods;
+﻿using ClassifiedAds.Application.FileEntries.DTOs;
+using ClassifiedAds.CrossCuttingConcerns.ExtensionMethods;
 using ClassifiedAds.Domain.Entities;
 using ClassifiedAds.Domain.Events;
 using ClassifiedAds.Domain.Identity;
@@ -6,20 +7,20 @@ using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace ClassifiedAds.Application.FileEntries.Events
+namespace ClassifiedAds.Application.FileEntries.EventHandlers
 {
-    public class FileEntryDeletedEventHandler : IDomainEventHandler<EntityDeletedEvent<FileEntry>>
+    public class FileEntryCreatedEventHandler : IDomainEventHandler<EntityCreatedEvent<FileEntry>>
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly IMessageSender<FileDeletedEvent> _fileDeletedEventSender;
+        private readonly IMessageSender<FileUploadedEvent> _fileUploadedEventSender;
 
-        public FileEntryDeletedEventHandler(IMessageSender<FileDeletedEvent> fileDeletedEventSender, IServiceProvider serviceProvider)
+        public FileEntryCreatedEventHandler(IMessageSender<FileUploadedEvent> fileUploadedEventSender, IServiceProvider serviceProvider)
         {
-            _fileDeletedEventSender = fileDeletedEventSender;
+            _fileUploadedEventSender = fileUploadedEventSender;
             _serviceProvider = serviceProvider;
         }
 
-        public void Handle(EntityDeletedEvent<FileEntry> domainEvent)
+        public void Handle(EntityCreatedEvent<FileEntry> domainEvent)
         {
             using (var scope = _serviceProvider.CreateScope())
             {
@@ -30,14 +31,14 @@ namespace ClassifiedAds.Application.FileEntries.Events
                 {
                     UserId = currentUser.IsAuthenticated ? currentUser.UserId : Guid.Empty,
                     CreatedDateTime = domainEvent.EventDateTime,
-                    Action = "DELETE_FILEENTRY",
+                    Action = "CREATED_FILEENTRY",
                     ObjectId = domainEvent.Entity.Id.ToString(),
                     Log = domainEvent.Entity.AsJsonString(),
                 });
             }
 
             // Forward to external systems
-            _fileDeletedEventSender.Send(new FileDeletedEvent
+            _fileUploadedEventSender.Send(new FileUploadedEvent
             {
                 FileEntry = domainEvent.Entity,
             });

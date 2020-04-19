@@ -1,2 +1,2 @@
 # Solution Structure
-![alt text](/docs/imgs/code-solution-structure.png)
+![alt text](/docs/imgs/code-solution-structure-modular-monolith.png)

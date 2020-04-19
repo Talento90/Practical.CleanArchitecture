@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ClassifiedAds.Application;
 using ClassifiedAds.Modules.AuditLog.Contracts.DTOs;
-using ClassifiedAds.Modules.AuditLog.Contracts.Services;
+using ClassifiedAds.Modules.AuditLog.Contracts.Queries;
 using ClassifiedAds.Modules.Product.Commands;
 using ClassifiedAds.Modules.Product.DTOs;
 using ClassifiedAds.Modules.Product.Queries;
@@ -25,15 +25,12 @@ namespace ClassifiedAds.Modules.Product.Controllers
         private readonly Dispatcher _dispatcher;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
-        private readonly IAuditLogService _auditLogService;
 
-        public ProductsController(Dispatcher dispatcher, ILogger<ProductsController> logger, IMapper mapper,
-            IAuditLogService auditLogService)
+        public ProductsController(Dispatcher dispatcher, ILogger<ProductsController> logger, IMapper mapper)
         {
             _dispatcher = dispatcher;
             _logger = logger;
             _mapper = mapper;
-            _auditLogService = auditLogService;
         }
 
         [HttpGet]
@@ -100,7 +97,7 @@ namespace ClassifiedAds.Modules.Product.Controllers
         [HttpGet("{id}/auditlogs")]
         public ActionResult<IEnumerable<AuditLogEntryDTO>> GetAuditLogs(Guid id)
         {
-            var logs = _auditLogService.GetAuditLogEntries(new AuditLogEntryQueryOptions { ObjectId = id.ToString() });
+            var logs = _dispatcher.Dispatch(new GetAuditEntriesQuery { ObjectId = id.ToString() });
 
             List<dynamic> entries = new List<dynamic>();
             ProductDTO previous = null;

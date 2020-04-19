@@ -60,10 +60,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 .Reverse()
                 .ToList();
 
-            Type interfaceType = type.GetInterfaces().Single(y => IsHandlerInterface(y));
-            Func<IServiceProvider, object> factory = BuildPipeline(pipeline, interfaceType);
+            var interfaceTypes = type.GetInterfaces().Where(y => IsHandlerInterface(y)).ToList();
 
-            services.AddTransient(interfaceType, factory);
+            foreach (var interfaceType in interfaceTypes)
+            {
+                Func<IServiceProvider, object> factory = BuildPipeline(pipeline, interfaceType);
+
+                services.AddTransient(interfaceType, factory);
+            }
         }
 
         private static Func<IServiceProvider, object> BuildPipeline(List<Type> pipeline, Type interfaceType)

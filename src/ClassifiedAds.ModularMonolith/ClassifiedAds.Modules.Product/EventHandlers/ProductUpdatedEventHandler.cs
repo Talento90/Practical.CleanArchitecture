@@ -3,8 +3,6 @@ using ClassifiedAds.Domain.Events;
 using ClassifiedAds.Domain.Identity;
 using ClassifiedAds.Modules.AuditLog.Contracts.DTOs;
 using ClassifiedAds.Modules.AuditLog.Contracts.Services;
-using ClassifiedAds.Modules.Product.Entities;
-using ClassifiedAds.Modules.Product.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

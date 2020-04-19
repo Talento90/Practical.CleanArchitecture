@@ -1,8 +1,9 @@
 ﻿using ClassifiedAds.Application;
 using ClassifiedAds.Modules.AuditLog.Contracts.DTOs;
+using ClassifiedAds.Modules.AuditLog.Contracts.Queries;
 using ClassifiedAds.Modules.AuditLog.Entities;
 using ClassifiedAds.Modules.AuditLog.Repositories;
-using ClassifiedAds.Modules.Identity.Contracts.Services;
+using ClassifiedAds.Modules.Identity.Contracts.Queries;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,15 @@ using System.Linq;
 
 namespace ClassifiedAds.Modules.AuditLog.Queries
 {
-    public class GetAuditEntriesQuery : AuditLogEntryQueryOptions, IQuery<List<AuditLogEntryDTO>>
-    {
-    }
-
     public class GetAuditEntriesQueryHandler : IQueryHandler<GetAuditEntriesQuery, List<AuditLogEntryDTO>>
     {
         private readonly AuditLogDbContext _dbContext;
-        private readonly IUserService _userService;
+        private readonly Dispatcher _dispatcher;
 
-        public GetAuditEntriesQueryHandler(AuditLogDbContext dbContext, IUserService userRepository)
+        public GetAuditEntriesQueryHandler(AuditLogDbContext dbContext, Dispatcher dispatcher)
         {
             _dbContext = dbContext;
-            _userService = userRepository;
+            _dispatcher = dispatcher;
         }
 
         public List<AuditLogEntryDTO> Handle(GetAuditEntriesQuery queryOptions)
@@ -45,7 +42,7 @@ namespace ClassifiedAds.Modules.AuditLog.Queries
             }
 
             var auditLogs = query.ToList();
-            var users = _userService.Get();
+            var users = _dispatcher.Dispatch(new GetUsersQuery());
 
             var rs = auditLogs.Join(users, x => x.UserId, y => y.Id,
                 (x, y) => new AuditLogEntryDTO

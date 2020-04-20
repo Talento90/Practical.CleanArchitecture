@@ -1,4 +1,4 @@
-﻿using ClassifiedAds.Modules.Storage.Entities;
+﻿using ClassifiedAds.Modules.Storage.Contracts.DTOs;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.IO;
@@ -21,7 +21,7 @@ namespace ClassifiedAds.Modules.Storage.Storages.Azure
             _container = blobClient.GetContainerReference(_containerName);
         }
 
-        public void Create(FileEntry fileEntry, MemoryStream stream)
+        public void Create(FileEntryDTO fileEntry, MemoryStream stream)
         {
             _container.CreateIfNotExistsAsync().GetAwaiter().GetResult();
 
@@ -33,13 +33,13 @@ namespace ClassifiedAds.Modules.Storage.Storages.Azure
             fileEntry.FileLocation = name;
         }
 
-        public void Delete(FileEntry fileEntry)
+        public void Delete(FileEntryDTO fileEntry)
         {
             CloudBlockBlob blob = _container.GetBlockBlobReference(fileEntry.FileLocation);
             blob.DeleteAsync().Wait();
         }
 
-        public byte[] Read(FileEntry fileEntry)
+        public byte[] Read(FileEntryDTO fileEntry)
         {
             CloudBlockBlob blob = _container.GetBlockBlobReference(fileEntry.FileLocation);
             using (var stream = new MemoryStream())

@@ -1,4 +1,4 @@
-﻿namespace ClassifiedAds.Infrastructure.MessageBrokers.RabbitMQ
+﻿namespace ClassifiedAds.Modules.MessageBorkers.RabbitMQ
 {
     public class RabbitMQSenderOptions
     {

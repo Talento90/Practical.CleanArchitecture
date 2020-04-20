@@ -1,12 +1,12 @@
-﻿using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
+﻿using ClassifiedAds.Modules.MessageBorkers.Contracts.Services;
 using Confluent.Kafka;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
-namespace ClassifiedAds.Infrastructure.MessageBrokers.Kafka
+namespace ClassifiedAds.Modules.MessageBorkers.Kafka
 {
-    public class KafkaSender<T> : IMessageSender<T>, IDisposable
+    public class KafkaSender<T> : IMessageBusSender<T>, IDisposable
     {
         private readonly string _topic;
         private readonly IProducer<Null, string> _producer;

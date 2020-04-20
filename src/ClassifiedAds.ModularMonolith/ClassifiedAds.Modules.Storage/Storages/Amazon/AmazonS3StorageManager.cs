@@ -2,7 +2,7 @@
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
-using ClassifiedAds.Modules.Storage.Entities;
+using ClassifiedAds.Modules.Storage.Contracts.DTOs;
 using System.IO;
 
 namespace ClassifiedAds.Modules.Storage.Storages.Amazon
@@ -18,7 +18,7 @@ namespace ClassifiedAds.Modules.Storage.Storages.Amazon
             _bucketName = bucketName;
         }
 
-        public void Create(FileEntry fileEntry, MemoryStream stream)
+        public void Create(FileEntryDTO fileEntry, MemoryStream stream)
         {
             var fileTransferUtility = new TransferUtility(_client);
 
@@ -35,12 +35,12 @@ namespace ClassifiedAds.Modules.Storage.Storages.Amazon
             fileEntry.FileLocation = fileEntry.Id.ToString();
         }
 
-        public void Delete(FileEntry fileEntry)
+        public void Delete(FileEntryDTO fileEntry)
         {
             _client.DeleteObjectAsync(_bucketName, fileEntry.FileLocation).Wait();
         }
 
-        public byte[] Read(FileEntry fileEntry)
+        public byte[] Read(FileEntryDTO fileEntry)
         {
             var request = new GetObjectRequest
             {

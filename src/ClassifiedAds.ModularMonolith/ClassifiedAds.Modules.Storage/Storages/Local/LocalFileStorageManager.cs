@@ -1,4 +1,4 @@
-﻿using ClassifiedAds.Modules.Storage.Entities;
+﻿using ClassifiedAds.Modules.Storage.Contracts.DTOs;
 using System.IO;
 
 namespace ClassifiedAds.Modules.Storage.Storages.Local
@@ -12,7 +12,7 @@ namespace ClassifiedAds.Modules.Storage.Storages.Local
             _rootPath = rootPath;
         }
 
-        public void Create(FileEntry fileEntry, MemoryStream stream)
+        public void Create(FileEntryDTO fileEntry, MemoryStream stream)
         {
             var trustedFileNameForFileStorage = Path.GetRandomFileName();
             var filePath = Path.Combine(_rootPath, trustedFileNameForFileStorage);
@@ -25,7 +25,7 @@ namespace ClassifiedAds.Modules.Storage.Storages.Local
             fileEntry.FileLocation = trustedFileNameForFileStorage;
         }
 
-        public void Delete(FileEntry fileEntry)
+        public void Delete(FileEntryDTO fileEntry)
         {
             var path = Path.Combine(_rootPath, fileEntry.FileLocation);
             if (File.Exists(path))
@@ -34,7 +34,7 @@ namespace ClassifiedAds.Modules.Storage.Storages.Local
             }
         }
 
-        public byte[] Read(FileEntry fileEntry)
+        public byte[] Read(FileEntryDTO fileEntry)
         {
             return File.ReadAllBytes(Path.Combine(_rootPath, fileEntry.FileLocation));
         }

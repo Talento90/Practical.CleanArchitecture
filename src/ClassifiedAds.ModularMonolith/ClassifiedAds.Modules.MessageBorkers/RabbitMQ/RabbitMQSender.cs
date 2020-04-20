@@ -1,11 +1,11 @@
-﻿using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
+﻿using ClassifiedAds.Modules.MessageBorkers.Contracts.Services;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System.Text;
 
-namespace ClassifiedAds.Infrastructure.MessageBrokers.RabbitMQ
+namespace ClassifiedAds.Modules.MessageBorkers.RabbitMQ
 {
-    public class RabbitMQSender<T> : IMessageSender<T>
+    public class RabbitMQSender<T> : IMessageBusSender<T>
     {
         private readonly IConnectionFactory _connectionFactory;
         private readonly string _exchangeName;

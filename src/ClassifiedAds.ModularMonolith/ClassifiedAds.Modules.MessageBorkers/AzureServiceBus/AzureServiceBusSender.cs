@@ -1,12 +1,12 @@
-﻿using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
+﻿using ClassifiedAds.Modules.MessageBorkers.Contracts.Services;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassifiedAds.Infrastructure.MessageBrokers.AzureServiceBus
+namespace ClassifiedAds.Modules.MessageBorkers.AzureServiceBus
 {
-    public class AzureServiceBusSender<T> : IMessageSender<T>
+    public class AzureServiceBusSender<T> : IMessageBusSender<T>
     {
         private readonly string _connectionString;
         private readonly string _queueName;

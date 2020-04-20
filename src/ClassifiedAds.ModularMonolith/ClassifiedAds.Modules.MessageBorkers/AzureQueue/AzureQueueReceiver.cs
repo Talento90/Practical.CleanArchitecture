@@ -1,13 +1,13 @@
-﻿using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
+﻿using ClassifiedAds.Modules.MessageBorkers.Contracts.Services;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Queue;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
-namespace ClassifiedAds.Infrastructure.MessageBrokers.AzureQueue
+namespace ClassifiedAds.Modules.MessageBorkers.AzureQueue
 {
-    public class AzureQueueReceiver<T> : IMessageReceiver<T>
+    public class AzureQueueReceiver<T> : IMessageBusReceiver<T>
     {
         private readonly string _connectionString;
         private readonly string _queueName;

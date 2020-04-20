@@ -21,23 +21,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassifiedAds.Application",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{38967FEA-2C16-4297-8028-1B83DC14AC3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.Notification", "ClassifiedAds.Modules.Notification\ClassifiedAds.Modules.Notification.csproj", "{BB2C39AF-A33D-49B4-AAE1-9D28AAE53BA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassifiedAds.Modules.Notification", "ClassifiedAds.Modules.Notification\ClassifiedAds.Modules.Notification.csproj", "{BB2C39AF-A33D-49B4-AAE1-9D28AAE53BA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.Identity", "ClassifiedAds.Modules.Identity\ClassifiedAds.Modules.Identity.csproj", "{19DF0BF0-91B3-44F1-810E-CD4E94E0A1F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassifiedAds.Modules.Identity", "ClassifiedAds.Modules.Identity\ClassifiedAds.Modules.Identity.csproj", "{19DF0BF0-91B3-44F1-810E-CD4E94E0A1F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.Storage", "ClassifiedAds.Modules.Storage\ClassifiedAds.Modules.Storage.csproj", "{D6E4172C-506E-46D2-86BB-3E693A53103B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassifiedAds.Modules.Storage", "ClassifiedAds.Modules.Storage\ClassifiedAds.Modules.Storage.csproj", "{D6E4172C-506E-46D2-86BB-3E693A53103B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.AuditLog", "ClassifiedAds.Modules.AuditLog\ClassifiedAds.Modules.AuditLog.csproj", "{154EA02A-FEB0-458E-921E-C75678AF796E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassifiedAds.Modules.AuditLog", "ClassifiedAds.Modules.AuditLog\ClassifiedAds.Modules.AuditLog.csproj", "{154EA02A-FEB0-458E-921E-C75678AF796E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.Product", "ClassifiedAds.Modules.Product\ClassifiedAds.Modules.Product.csproj", "{E8DD1746-6A6D-487F-8A42-C2166066C95B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassifiedAds.Modules.Product", "ClassifiedAds.Modules.Product\ClassifiedAds.Modules.Product.csproj", "{E8DD1746-6A6D-487F-8A42-C2166066C95B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.AuditLog.Contracts", "ClassifiedAds.Modules.AuditLog.Contracts\ClassifiedAds.Modules.AuditLog.Contracts.csproj", "{FC2FDA8F-2A42-4C7E-BF9A-1BA8055508D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassifiedAds.Modules.AuditLog.Contracts", "ClassifiedAds.Modules.AuditLog.Contracts\ClassifiedAds.Modules.AuditLog.Contracts.csproj", "{FC2FDA8F-2A42-4C7E-BF9A-1BA8055508D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.Identity.Contracts", "ClassifiedAds.Modules.Identity.Contracts\ClassifiedAds.Modules.Identity.Contracts.csproj", "{84EC02FA-657E-4434-9FBA-8F99436A62B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassifiedAds.Modules.Identity.Contracts", "ClassifiedAds.Modules.Identity.Contracts\ClassifiedAds.Modules.Identity.Contracts.csproj", "{84EC02FA-657E-4434-9FBA-8F99436A62B9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassifiedAds.IdentityServer", "ClassifiedAds.IdentityServer\ClassifiedAds.IdentityServer.csproj", "{3B35EA9C-4B5F-493B-BB17-C4F8794EE361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.TokenProvider", "ClassifiedAds.Modules.TokenProvider\ClassifiedAds.Modules.TokenProvider.csproj", "{EA3EC8A6-8399-43C7-AE9C-E69EAFC74DC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassifiedAds.Modules.TokenProvider", "ClassifiedAds.Modules.TokenProvider\ClassifiedAds.Modules.TokenProvider.csproj", "{EA3EC8A6-8399-43C7-AE9C-E69EAFC74DC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.Storage.Contracts", "ClassifiedAds.Modules.Storage.Contracts\ClassifiedAds.Modules.Storage.Contracts.csproj", "{9A2A6B10-0AAF-4DB5-BE69-F6DC1AA8097B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.MessageBorkers", "ClassifiedAds.Modules.MessageBorkers\ClassifiedAds.Modules.MessageBorkers.csproj", "{1E909980-11FB-428D-9A82-A02DEEE7BBE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassifiedAds.Modules.MessageBorkers.Contracts", "ClassifiedAds.Modules.MessageBorkers.Contracts\ClassifiedAds.Modules.MessageBorkers.Contracts.csproj", "{EADB54F7-2BC5-42AF-BBC4-DB3BB5A9177F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +111,18 @@ Global
 		{EA3EC8A6-8399-43C7-AE9C-E69EAFC74DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA3EC8A6-8399-43C7-AE9C-E69EAFC74DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA3EC8A6-8399-43C7-AE9C-E69EAFC74DC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A2A6B10-0AAF-4DB5-BE69-F6DC1AA8097B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A2A6B10-0AAF-4DB5-BE69-F6DC1AA8097B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A2A6B10-0AAF-4DB5-BE69-F6DC1AA8097B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A2A6B10-0AAF-4DB5-BE69-F6DC1AA8097B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E909980-11FB-428D-9A82-A02DEEE7BBE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E909980-11FB-428D-9A82-A02DEEE7BBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E909980-11FB-428D-9A82-A02DEEE7BBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E909980-11FB-428D-9A82-A02DEEE7BBE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EADB54F7-2BC5-42AF-BBC4-DB3BB5A9177F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EADB54F7-2BC5-42AF-BBC4-DB3BB5A9177F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EADB54F7-2BC5-42AF-BBC4-DB3BB5A9177F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EADB54F7-2BC5-42AF-BBC4-DB3BB5A9177F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,6 +143,9 @@ Global
 		{84EC02FA-657E-4434-9FBA-8F99436A62B9} = {38967FEA-2C16-4297-8028-1B83DC14AC3F}
 		{3B35EA9C-4B5F-493B-BB17-C4F8794EE361} = {62A1AB08-A2DB-404F-B073-0F89CA780F45}
 		{EA3EC8A6-8399-43C7-AE9C-E69EAFC74DC6} = {38967FEA-2C16-4297-8028-1B83DC14AC3F}
+		{9A2A6B10-0AAF-4DB5-BE69-F6DC1AA8097B} = {38967FEA-2C16-4297-8028-1B83DC14AC3F}
+		{1E909980-11FB-428D-9A82-A02DEEE7BBE8} = {38967FEA-2C16-4297-8028-1B83DC14AC3F}
+		{EADB54F7-2BC5-42AF-BBC4-DB3BB5A9177F} = {38967FEA-2C16-4297-8028-1B83DC14AC3F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2C23354-4AAD-41AC-9E06-0A6F210ACEEF}

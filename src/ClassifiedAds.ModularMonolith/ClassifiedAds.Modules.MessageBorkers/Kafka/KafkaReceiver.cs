@@ -1,13 +1,13 @@
-﻿using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
+﻿using ClassifiedAds.Modules.MessageBorkers.Contracts.Services;
 using Confluent.Kafka;
 using Newtonsoft.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ClassifiedAds.Infrastructure.MessageBrokers.Kafka
+namespace ClassifiedAds.Modules.MessageBorkers.Kafka
 {
-    public class KafkaReceiver<T> : IMessageReceiver<T>, IDisposable
+    public class KafkaReceiver<T> : IMessageBusReceiver<T>, IDisposable
     {
         private readonly IConsumer<Ignore, string> _consumer;
 

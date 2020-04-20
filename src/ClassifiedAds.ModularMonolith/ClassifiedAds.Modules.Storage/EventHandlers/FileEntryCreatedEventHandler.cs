@@ -1,9 +1,9 @@
 ﻿using ClassifiedAds.CrossCuttingConcerns.ExtensionMethods;
 using ClassifiedAds.Domain.Events;
 using ClassifiedAds.Domain.Identity;
-using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
 using ClassifiedAds.Modules.AuditLog.Contracts.DTOs;
 using ClassifiedAds.Modules.AuditLog.Contracts.Services;
+using ClassifiedAds.Modules.MessageBorkers.Contracts.Services;
 using ClassifiedAds.Modules.Storage.DTOs;
 using ClassifiedAds.Modules.Storage.Entities;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,7 +36,7 @@ namespace ClassifiedAds.Modules.Storage.EventHandlers
                     Log = domainEvent.Entity.AsJsonString(),
                 });
 
-                IMessageSender<FileUploadedEvent> fileUploadedEventSender = scope.ServiceProvider.GetService<IMessageSender<FileUploadedEvent>>();
+                IMessageBusSender<FileUploadedEvent> fileUploadedEventSender = scope.ServiceProvider.GetService<IMessageBusSender<FileUploadedEvent>>();
 
                 // Forward to external systems
                 fileUploadedEventSender.Send(new FileUploadedEvent

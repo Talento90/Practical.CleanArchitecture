@@ -1,4 +1,4 @@
-﻿using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
+﻿using ClassifiedAds.Modules.MessageBorkers.Contracts.Services;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 using System;
@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ClassifiedAds.Infrastructure.MessageBrokers.AzureServiceBus
+namespace ClassifiedAds.Modules.MessageBorkers.AzureServiceBus
 {
-    public class AzureServiceBusReceiver<T> : IMessageReceiver<T>
+    public class AzureServiceBusReceiver<T> : IMessageBusReceiver<T>
     {
         private readonly string _connectionString;
         private readonly string _queueName;

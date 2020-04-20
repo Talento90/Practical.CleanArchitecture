@@ -1,9 +1,9 @@
 ﻿using ClassifiedAds.CrossCuttingConcerns.ExtensionMethods;
 using ClassifiedAds.Domain.Events;
 using ClassifiedAds.Domain.Identity;
-using ClassifiedAds.Domain.Infrastructure.MessageBrokers;
 using ClassifiedAds.Modules.AuditLog.Contracts.DTOs;
 using ClassifiedAds.Modules.AuditLog.Contracts.Services;
+using ClassifiedAds.Modules.MessageBorkers.Contracts.Services;
 using ClassifiedAds.Modules.Storage.DTOs;
 using ClassifiedAds.Modules.Storage.Entities;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,7 +36,7 @@ namespace ClassifiedAds.Modules.Storage.EventHandlers
                     Log = domainEvent.Entity.AsJsonString(),
                 });
 
-                IMessageSender<FileDeletedEvent> fileDeletedEventSender = scope.ServiceProvider.GetService<IMessageSender<FileDeletedEvent>>();
+                IMessageBusSender<FileDeletedEvent> fileDeletedEventSender = scope.ServiceProvider.GetService<IMessageBusSender<FileDeletedEvent>>();
 
                 // Forward to external systems
                 fileDeletedEventSender.Send(new FileDeletedEvent

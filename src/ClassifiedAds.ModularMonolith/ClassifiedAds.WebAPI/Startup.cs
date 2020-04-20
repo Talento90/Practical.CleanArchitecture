@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using ClassifiedAds.Domain.Identity;
 using ClassifiedAds.Infrastructure.Logging;
-using ClassifiedAds.Modules.Identity;
+using ClassifiedAds.Modules.Identity.Contracts.Services;
 using ClassifiedAds.Modules.Identity.Repositories;
+using ClassifiedAds.Modules.Identity.Services;
 using ClassifiedAds.WebAPI.ConfigurationOptions;
 using ClassifiedAds.WebAPI.Filters;
 using IdentityServer4.AccessTokenValidation;

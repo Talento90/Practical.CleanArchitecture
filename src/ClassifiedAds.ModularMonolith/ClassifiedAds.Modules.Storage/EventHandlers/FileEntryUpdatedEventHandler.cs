@@ -1,8 +1,8 @@
 ﻿using ClassifiedAds.CrossCuttingConcerns.ExtensionMethods;
 using ClassifiedAds.Domain.Events;
-using ClassifiedAds.Domain.Identity;
 using ClassifiedAds.Modules.AuditLog.Contracts.DTOs;
 using ClassifiedAds.Modules.AuditLog.Contracts.Services;
+using ClassifiedAds.Modules.Identity.Contracts.Services;
 using ClassifiedAds.Modules.Storage.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using System;

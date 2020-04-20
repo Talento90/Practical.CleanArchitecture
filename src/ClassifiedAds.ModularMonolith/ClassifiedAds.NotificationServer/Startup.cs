@@ -1,5 +1,5 @@
-﻿using ClassifiedAds.NotificationServer.ConfigurationOptions;
-using ClassifiedAds.NotificationServer.Hubs;
+﻿using ClassifiedAds.Modules.Notification.Hubs;
+using ClassifiedAds.NotificationServer.ConfigurationOptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
